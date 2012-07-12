@@ -1,0 +1,27 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+
+
+<div class="container">
+<h2>Course Search</h2>
+	<div >
+		<%= form_tag events_showall_coaches_events_path do %>
+			<table border="0" >
+				<tr>
+				<td>Title:</td>
+				<td><%= text_field_tag :searchEventTitle, session['searchEventTitle'] %> </td>
+				<td> Event type:</td>
+				<td>
+					<%= select_tag :searchEventType, options_from_collection_for_select(@eventTypeArray, "id", "name", session['searchEventType']), :prompt => "---Please Select---" %> 
+				</td>
+				</tr>
+				<tr> 
+					<tr><td><%= submit_tag "Search" ,:name => nil %>   </td>
+					<td> </td>
+				</tr>
+			</table>
+		<% end %>
+		<%=link_to "Back to My Event List", events_showall_coaches_events_path , {:class=>"custom_button"}%>
+	</div>
+</div>

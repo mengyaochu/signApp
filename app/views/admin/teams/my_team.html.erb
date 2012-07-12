@@ -1,0 +1,22 @@
+<h5>My Team</h5>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>team name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @team_list.each do |user_team| %>
+  <tr>
+    <td><%= "#{user_team.try(:student).try(:first_name)}" + ' ' + "#{user_team.try(:student).try(:last_name)}"  %></td>
+    <td><%= link_to 'Show', '#' %></td>
+    <td><%= link_to 'Edit', '#' %></td>
+    <td><%= link_to 'Destroy', '#', confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

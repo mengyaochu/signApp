@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  type: 
+  type_of_offer: MyText
+  start_date: 2012-02-19 23:52:39
+  end_date: 2012-02-19 23:52:39
+  group_size_min: 1
+  group_size_max: 1
+  weekend_discount: 1
+  weekday_discount: 1
+  sessoin: MyString
+  cuisine_type: MyText
+  non_veg: MyString
+  services: MyString
+  cost: MyString
+  summary_title: MyString
+  summary_quote: MyString
+  terms_of_offer: MyText
+  description: MyText
+
+two:
+  title: MyString
+  type: 
+  type_of_offer: MyText
+  start_date: 2012-02-19 23:52:39
+  end_date: 2012-02-19 23:52:39
+  group_size_min: 1
+  group_size_max: 1
+  weekend_discount: 1
+  weekday_discount: 1
+  sessoin: MyString
+  cuisine_type: MyText
+  non_veg: MyString
+  services: MyString
+  cost: MyString
+  summary_title: MyString
+  summary_quote: MyString
+  terms_of_offer: MyText
+  description: MyText

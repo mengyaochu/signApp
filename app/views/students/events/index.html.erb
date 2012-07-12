@@ -1,0 +1,40 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+<div class="div_list">
+<% if(notice)%><p class="alert"><%= notice %></p><% end %>
+<div class="container">
+<p>
+<%= link_to "New event", new_students_event_path %> | <%= link_to "Search", events_search_students_events_path %>
+</p>
+<% @events.each do |event| %>
+  <dl class="listField">
+    <dt>
+      <%= link_to event.title, students_event_path(event) %>
+    </dt>
+    <dd>
+      Type: <%= @eventTypeArray[event.event_type_id.to_i - 1][:name] %> 
+      <% if event.related_id != 0 then %> Received from: <%= Event.find(event.related_id).user.first_name %> <% end %>
+      <% if event.with != 0 then %> With: <%= User.find(event.with).first_name %> <% end %>
+      </br>Duration: <%= event.starts_at.to_s[0,19] %> ~ <%= event.ends_at.to_s[0,19] %>
+      </br>Description: <%= event.description %>
+    </dd>
+    <dd>
+      <%= link_to 'Edit', edit_students_event_path(event) %>
+      <%= link_to 'Delete', "/students/events/#{event.id}", :confirm => 'Are you sure?', :method => :delete %>
+    </dd>
+  </dl>
+<% end %>
+<br />
+<%= paginate @events %> 
+</div>
+</div>
+<script type="text/javascript">
+<!-- 
+function changeEventPage() {
+	var curPageNum = document.getElementById("pageNum_pageNum").value;
+	var pageURL = "/events_showall?pageNum=".concat(curPageNum);
+	location.replace(pageURL);
+}
+-->
+</script> 

@@ -1,0 +1,47 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+<div class="div_list">
+	<% if(notice)%><p class="alert"><%= notice %></p><% end %>
+<div class="container">
+  <p> <%= link_to "Search", courses_search_students_courses_path %> </p>
+	<% @courses.each do |course| %>
+	<dl class="listField">
+	  <dt>
+        <%= link_to course.title, students_course_path(course) %>
+      </dt>
+      <dd>
+        Status: <%= course.status %> &nbsp;&nbsp;&nbsp; CRN: <%= course.crn %> &nbsp;&nbsp;&nbsp;  Subject: <%= course.subject %> 
+	    Term: <%= course.term %> &nbsp;&nbsp;&nbsp; Department:<%= course.department %> &nbsp;&nbsp;&nbsp; Instructor: <%= course.instructor %>
+	    BLDG/RM: <%= course.bldg %> &nbsp;&nbsp;&nbsp; Sect: <%= course.sect %> &nbsp;&nbsp;&nbsp; Credit:<%= course.credit %> &nbsp;&nbsp;&nbsp; Fee: <%= course.fee %>
+	    <br/>Duration: <%= course.from %> ~  <%= course.to %> 
+	    <% if course.start_time.to_s[10,6].strip != "00:00" then %>
+	    ( <%= course.day %> <%= course.start_time.to_s[10,6] %> ~ <%= course.end_time.to_s[10,6] %>)
+	    <% end %>
+	  </dd>
+	  <dd>
+		  <% @current_user_rolename = current_user.roles.collect.first[:name] %>
+		  <% if (@current_user_rolename == "student" ) then %>
+				<% if (UsersCourse.where("course_id = ? AND student_id = ?", course.id, current_user.id).length == 0 ) %>
+				<%= link_to "Assign", course_assign_students_courses_path(:id => course.id) %>
+				<% else %>
+				<%= link_to "Unassign", course_unassign_students_courses_path(:id => course.id) %>
+				<% end %>
+		  <% end %>
+			<% if (@current_user_rolename == "owner" ) then %>
+				<%= link_to 'Edit', edit_students_course_path(course) %>
+				<%= link_to 'Delete', "/students/courses/#{course.id}", confirm: 'Are you sure?', method: :delete %>
+			<% end %>
+	  </dd>
+	</dl>
+	<% end %>
+</div>
+<%= paginate @courses %> 
+<br />
+</div>
+
+<script type="text/javascript">
+<!-- 
+
+-->
+</script> 

@@ -1,0 +1,144 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+
+<div class="container"> 
+<h2>Course Detail</h2>
+<% if notice %><p class="alert"><%= notice %></p><% end %>
+
+<table class="edit_table">
+	<tr>
+	  	<td>
+  			<b>Course title:</b>
+  		</td>
+	  	<td>
+  			<%= @course.title %>
+		</td>
+	</tr>
+ 	<tr>
+		<td width="250px">
+			<b>Term:</b>
+		</td>
+	  	<td>
+	  		<%= @course.term %>
+	  	</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Department:</b>
+  		</td>
+	  	<td>
+  			<%= @course.department %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Course registration number:</b>
+  		</td>
+	  	<td>
+  			<%= @course.crn %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Status:</b>
+  		</td>
+	  	<td>
+  			<%= @course.status %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Subject:</b>
+  		</td>
+	  	<td>
+  			<%= @course.subject %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+			<b>Sect:</b>
+		</td>
+	  	<td>
+		  	<%= @course.sect %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Credit:</b>
+  		</td>
+	  	<td>
+  			<%= @course.credit %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Instructor:</b>
+  		</td>
+	  	<td>
+  			<%= @course.instructor %>
+		</td>
+	</tr>
+	<tr>
+			<td>
+				<b>BLDG/RM:</b>
+			</td>
+			<td>
+				<%= @course.bldg %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Day:</b>
+  		</td>
+	  	<td>
+  			<%= @course.day %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Start time:</b>
+  		</td>
+	  	<td>
+  			<%= @course.start_time.to_s[10,6] %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>End time:</b>
+  		</td>
+	  	<td>
+  			<%= @course.end_time.to_s[10,6] %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>From:</b>
+  		</td>
+	  	<td>
+  			<%= @course.from %>
+	</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>To:</b>
+  		</td>
+	  	<td>
+  			<%= @course.to %>
+		</td>
+	</tr>
+	<tr>
+	  	<td>
+  			<b>Fee:</b>
+  		</td>
+	  	<td>
+  			<%= @course.fee %>
+		</td>
+	</tr>
+</table>
+<br/>
+<div class="button_div">
+<%= link_to "Back", courses_showall_students_courses_path , {:class=>"custom_button"}%>
+<br/>
+<div>
+</div>

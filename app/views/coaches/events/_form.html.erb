@@ -1,0 +1,52 @@
+<%= form_for @event, :url => { :action => @action_path} do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li class="alert"><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :event_type_id %>
+    <%= select(:event, :event_type_id, @eventTypeArray.collect {|p| [ p.name, p.id ] }, {:selected => :event_type_id}) %>
+  </div>
+  <div class="field">
+    <%= f.label "With" %>
+    <%= select(:event, :with, @studentArray.collect{|p, name| [name, p]}, {:include_blank => "Me", :selected => :with}) %>
+  </div>
+  <div class="field">
+    <%= f.label :starts_at %>
+    <%= f.text_field :starts_at, :class => "created-at-datetime", :value =>"#{@event[:starts_at].to_s[0,19]}"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ends_at %>
+    <%= f.text_field :ends_at, :class => "created-at-datetime", :value =>"#{@event[:ends_at].to_s[0,19]}"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, {:size => "40x6"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+    <%= link_to 'Back to event list', events_showall_coaches_events_path%>
+  </div>
+<% end %>
+<script type="text/javascript">
+<!-- 
+onload = function () {
+$('.created-at-datetime').datetimepicker({dateFormat: 'yy-mm-dd ', timeFormat: 'hh:mm:ss ', ampm: false});
+}
+-->
+</script> 
+

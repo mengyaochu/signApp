@@ -1,0 +1,32 @@
+
+<% if current_user  %>
+    <%= render 'header' %>
+<% end %>
+
+<div class="container">
+<% if permitted_to? :new, @admin_teams %>
+<p>
+<%= link_to "New team", new_admin_team_path %>
+</p>
+<% end %>
+<p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+<% @teams.each do |team| %>
+  <tr>
+    <td><%= team.name %></td>
+    <td><%= link_to 'Show', [:admin,  team] %></td>
+    <td><% if permitted_to? :edit, @admin_teams %> <%= link_to 'Edit', edit_admin_team_path(team) %> <% end %></td>
+    <td><% if permitted_to? :delete, @admin_teams %> <%= link_to 'Delete', [:admin, team], confirm: 'Are you sure?', method: :delete %> <% end %> </td>
+  </tr>
+<% end %>
+</table>
+</div>
+<br />
+

@@ -1,0 +1,24 @@
+ <%= devise_error_messages! %>
+<div class="span-8">&nbsp;</div>
+<div class="span-8 column last">
+<fieldset>
+   <legend>Forgot your password?</legend>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+
+
+  <%= f.label :email , :class => 'text' %>
+  <%= f.email_field :email , :class => 'text' %>
+
+  <p class="buttons">
+      <%= f.submit "Send me reset password instructions" , :id => 'forgot-button', :class => 'button positive' %>
+  </p>
+
+<% end %>
+
+  <br>
+<%= render "links" %>
+</fieldset>
+</div>
+
+

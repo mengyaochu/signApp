@@ -1,0 +1,23 @@
+<h5>Listing coaches</h5>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>team name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @coaches.each do |coach| %>
+  <tr>
+    <td><%= "#{coach.try(:first_name)}" + ' ' + "#{coach.try(:last_name)}"  %></td>
+    <td><%= link_to "#{coach.try(:coach_team).try(:team).name}", my_team_admin_teams_path(:team_id => coach.try(:coach_team).try(:team).id) %></td>
+    <td><%= link_to 'Show', [:admin, coach] %></td>
+    <td><%= link_to 'Edit', edit_admin_coach_path(coach) %></td>
+    <td><%= link_to 'Destroy', [:admin, coach], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

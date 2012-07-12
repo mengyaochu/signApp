@@ -1,0 +1,47 @@
+<% if current_user  %>
+    <%= render 'header' %>
+<% end %>
+<%= semantic_form_for  @profile , :url => @profile.new_record? ? ('profile/create') : ('profile/update')  do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+ <% end %>
+ <% if(notice)%><p class="alert"><%= notice %></p><% end %>
+ <%= f.input :user_id,  :as => :hidden , :input_html =>{ :value => @user.id } %>
+    <div class="field">
+        <%= label_tag "first_name", "first_name: #{@user.first_name}" %>
+        <%= label_tag "last_name", "last_name: #{@user.last_name}" %>
+    </div>
+    <div class="field">
+        <%= label_tag "email", "email: #{@user.email}" %>
+    </div>
+    <div class="field">
+        <%= f.label :mobile_number %>
+        <%= f.text_field :mobile_number %>
+    </div>
+    <div class="field">
+        <%= f.label :landline_number %>
+        <%= f.text_field :landline_number %>
+    </div>
+    <div class="field">
+        <%= f.label :website %>
+        <%= f.text_field :website %>
+    </div>
+    <div class="field">
+        <%= f.label :information %>
+        <%= f.text_area :information %>
+    </div>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+    
+    <% if !(f.object.new_record?) %>
+        <%= f.input :id,  :as => :hidden , :input_html =>{ :value => f.object.id } %>
+    <% end %>
+<% end %>

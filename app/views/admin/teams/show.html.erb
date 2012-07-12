@@ -1,0 +1,26 @@
+<% if current_user  %>
+    <%= render 'header' %>
+<% end %>
+
+
+<div class="container"> 
+<h2>Team Detail</h2>
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @team.name %>
+</p>
+<p>
+  <b>Coach:</b>
+  <%= @team.coach.last_name if @team.coach != nil %>
+</p>
+<p>
+  <b>Students:</b>
+  <% if @team.students != nil then %>
+    <% @team.students.each do |user| %>
+    <%=  user.last_name  %>,
+    <% end %>
+  <% end %>
+</p>
+<%= link_to 'Back', admin_teams_path %>
+</div>

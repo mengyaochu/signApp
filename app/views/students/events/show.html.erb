@@ -1,0 +1,39 @@
+<% if current_user  %>
+  <%= render 'header' %>
+<% end %>
+
+<div class="container">
+<h2>Event Detail</h2>
+<% if notice %><p class="alert"><%= notice %></p><% end %>
+<p>
+  <b>Title:</b>
+  <%= @event.title %>
+</p>
+<p>
+  <b>Type:</b>
+  <%= EventType.find(@event.event_type_id).name %>
+</p>
+<p>
+  <b>With:</b>
+  <% if @event.with != 0 then %> 
+  	<%= User.find(@event.with).first_name %>
+  <% end %>
+</p>
+<p>
+  <b>Starts at:</b>
+  <%= @event.starts_at.to_s[0,19] %>
+</p>
+
+<p>
+  <b>Ends at:</b>
+  <%= @event.ends_at.to_s[0,19] %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @event.description %>
+</p> 
+
+<br/>
+<%= link_to 'Edit', edit_students_event_path(@event), {:class=>"custom_button"} %> 
+<%= link_to 'Back to event list', events_showall_students_events_path, {:class=>"custom_button"} %>
+</div>

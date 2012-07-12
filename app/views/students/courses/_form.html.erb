@@ -1,0 +1,82 @@
+<%= form_for @course,  :url => { :action => @action_path} do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :term %>
+    <%= f.text_field :term %>
+  </div>
+  <div class="field">
+    <%= f.label :department %>
+    <%= f.text_field :department %>
+  </div>
+  <div class="field">
+    <%= f.label "Course regstration number" %>
+    <%= f.text_field :crn %>
+  </div>
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :sect %>
+    <%= f.text_field :sect %>
+  </div>
+  <div class="field">
+    <%= f.label :credit %>
+    <%= f.text_field :credit %>
+  </div>
+  <div class="field">
+    <%= f.label :instructor %>
+    <%= f.text_field :instructor %>
+  </div>
+  <div class="field">
+    <%= f.label :bldg %>
+    <%= f.text_field :bldg %>
+  </div>
+  <div class="field">
+    <%= f.label :day %>
+    <%= f.text_field :day %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %>
+    <%= f.time_select :start_time, {:minute_step => 5}, {:class => "select_time"} %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %>
+    <%= f.time_select :end_time, {:minute_step => 5}, {:class => "select_time"} %>
+  </div>
+  <div class="field">
+    <%= f.label :from %>
+    <%= f.date_select :from, {}, {:class => "select_date"}%>
+  </div>
+  <div class="field">
+    <%= f.label :to %>
+    <%= f.date_select :to, {}, {:class => "select_date"}%>
+  </div>
+  <div class="field">
+    <%= f.label :fee %>
+    <%= f.text_field :fee %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+    <%= link_to 'Back', courses_showall_students_courses_path, {:class=>"custom_button"}%>
+  </div>
+<% end %>

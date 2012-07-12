@@ -1,0 +1,10 @@
+<% if current_user  %>
+		<%= render 'header' %>
+<% end %>
+
+<div class="container"> 
+<h2>Editing team</h2>
+<p id="notice"><%= notice %></p>
+		<%= render 'form' %>
+		<%= link_to 'Back', admin_teams_path %>
+</div>

@@ -1,0 +1,44 @@
+<div class="row">
+   <div class="eight columns">
+   	
+   </div>
+   <div class="four columns">
+       <div class="row">
+         <% if user_signed_in? %>
+            <div class="five columns">
+                <%= current_user.email  %>  | <%= link_to "Profile", users_profile_path %> | <%= link_to "Log out", logout_path %>
+            </div>
+	    <p> </p>
+            <div class="three colums"> 
+                <%= link_to "Home", root_path %>
+            </div>
+	    <p> </p>
+         <div class="ten colums"> 
+            <% @current_user_rolename = current_user.roles.collect.first[:name] %>
+            <% if @current_user_rolename == "owner" || @current_user_rolename == "admin" then %>
+               | <%= link_to "Users", admin_users_path %>
+            <% end %>
+            <% if @current_user_rolename == "owner" || @current_user_rolename == "admin" then %>
+               | <%= link_to "Teams", admin_teams_path %>
+            <% end %>
+            <% if @current_user_rolename == "coach" || @current_user_rolename == "student" then %>
+               | <%= link_to "Event calendar", calendar_index_path %>
+            <% end %>
+            <% if @current_user_rolename == "student" then %>
+               | <%= link_to "All events", events_index_students_events_path %>
+            <% end %>
+            <% if @current_user_rolename == "coach" then %>
+               | <%= link_to "All events", events_index_coaches_events_path %>
+            <% end %>
+            <% if @current_user_rolename == "coach" then %>
+               | <%= link_to "My Team", coaches_my_team_path %>
+            <% end %>
+            <% if @current_user_rolename == "owner" || @current_user_rolename == "student" then %>
+               | <%= link_to "All courses", courses_index_students_courses_path %>
+            <% end %>
+         </div>
+       <p> </p>
+          <% end %>
+       </div>
+   </div>
+</div>

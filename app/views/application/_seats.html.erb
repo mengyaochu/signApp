@@ -1,0 +1,81 @@
+<div class="box">
+<fieldset>
+  <legend>Add seats</legend>
+<%= f.fields_for :seats  do |seat_form|  %>
+      <p>
+
+        <%= seat_form.number_field :day_part , :size => '20', :placeholder => "day parts", :min => 1, :max => 500, :required => "required" %>
+        <%= seat_form.number_field :covers, :placeholder => 'covers' , :min => 1, :max => 500 , :required => "required"%>
+        <%= seat_form.label :lead_time %>
+        <%= seat_form.time_select :lead_time %>
+        <%= seat_form.datetime_select :startime  %>
+        <%= seat_form.datetime_select :end_time %>
+      </p>
+       <br>
+
+      <div class="field">
+        <%= seat_form.label :valid_on_weekends %>
+        <%= seat_form.check_box :valid_on_weekends %>
+
+        <%= seat_form.label :firday_is_included_in_weekend %>
+        <%= seat_form.check_box :firday_is_included_in_weekend %>
+
+        <%= seat_form.label :saturday_as_weekday %>
+        <%= seat_form.check_box :saturday_as_weekday %>
+
+        <%= seat_form.label :sunday_as_weekday %>
+        <%= seat_form.check_box :sunday_as_weekday %>
+       </div>
+
+    <br>
+    <hr>
+ <% end %>
+
+  <div id="add_seats"></div>
+
+  <h4><a href="#" id="addseats">Add Images</a></h4>
+ </fieldset>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+  $(function() {
+        var scntDiv = $('#add_seats');
+        var i = $('#add_seats p').size() + 1;
+
+        $('#addseats').live('click', function() {
+                 $('<p>' +
+                      '<input type="number" id="restaurant_seats_attributes_'+i+'_day_part" size="20" name="restaurant[seats_attributes]['+i+'][day_part]" value="" placeholder="day parts" , min => 1,  max = 500, required = "required" />&nbsp;&nbsp;' +
+                      '<input type="number" id="restaurant_seats_attributes_'+i+'_covers" size="20" name="restaurant[seats_attributes]['+i+'][covers]" value="" placeholder="covers" , min => 1,  max = 500, required = "required" />&nbsp;&nbsp;' +
+                      '<select id="restaurant_seats_attributes_'+i+'_lead_time_4i" name="restaurant[seats_attributes]['+i+'][lead_time(4i)]">' +
+                       <% %w(00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23).each do |mints| %>
+                      '<option value="<%=mints%>"><%=mints%></option>' +
+                      <% end %>
+                      '</select> : ' +
+                     '<select id="restaurant_seats_attributes_'+i+'_lead_time_5i" name="restaurant[seats_attributes]['+i+'][lead_time(5i)]">' +
+                      <% %w(00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59).each do |sec| %>
+                      '<option value="<%=sec%>"><%=sec%></option>' +
+                      <% end %>
+                      '</select>' +
+                   '<a href="#" id="seats_rm">Remove</a>' +
+                   '</p>'
+
+
+
+                 ).appendTo(scntDiv);
+                i++;
+              return false;
+        });
+
+        $('#seats_rm').live('click', function() {
+                if( i > 2 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+</script>

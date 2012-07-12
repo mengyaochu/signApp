@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  day_part: MyString
+  covers: 1
+  startime: 2012-02-21 00:55:53
+  end_time: 2012-02-21 00:55:53
+  lead_time: 2012-02-21 00:55:53
+  valid_on_weekends: false
+  firday_is_included_in_weekend: false
+  saturday_as_weekday: false
+  sunday_as_weekday: false
+  seatable_id: 1
+  seatable_type: MyString
+
+two:
+  day_part: MyString
+  covers: 1
+  startime: 2012-02-21 00:55:53
+  end_time: 2012-02-21 00:55:53
+  lead_time: 2012-02-21 00:55:53
+  valid_on_weekends: false
+  firday_is_included_in_weekend: false
+  saturday_as_weekday: false
+  sunday_as_weekday: false
+  seatable_id: 1
+  seatable_type: MyString

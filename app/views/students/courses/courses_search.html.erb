@@ -1,0 +1,76 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+
+<div class="container">
+<h2>Course Search</h2>
+    <div >
+	  	<%= form_tag courses_showall_students_courses_path do %>
+			<table border="0" >
+		      <tr>
+			  	<td>Title:</td>
+				<td>
+					<%= text_field_tag :searchCourseTitle, session['searchCourseTitle'] %> 
+				</td>
+				<td>   </td>
+			  	<td>Term:</td>
+				<td>
+					<%= select_tag :searchCourseTerm, options_from_collection_for_select(@terms, "term", "term", session['searchCourseTerm']), :prompt => "---Please Select---" %> 
+				</td>
+	   	        <td width="40px">  </td>
+			    <td></td>
+			  </tr>
+			  <tr>
+		      	<td>CRN: </td>
+				<td>
+					<%= text_field_tag :searchCourseCRN, session['searchCourseCRN'] %> 
+				</td>
+		        <td>   </td>
+		      	<td>Status:</td>
+		      	<td>
+					<%= select_tag :searchCourseStatus, options_from_collection_for_select(@status_group, "status", "status", session['searchCourseStatus']), {:prompt => "---Please Select---"} %> 
+				</td>
+		      </tr>
+		      <tr>
+		      	<td>Subject:</td>
+				<td>
+					<%= text_field_tag :searchCourseSubject, session['searchCourseSubject'] %> 
+				</td>
+		        <td>  </td>
+		      	<td>Instructor:</td>
+				<td>
+					<%= text_field_tag :searchCourseInstrutor, session['searchCourseInstrutor'] %> 
+				</td>
+		      </tr>
+			  <% if false %>
+		      <tr>
+		      	<td>From:</td>
+				<td>
+					<%= text_field_tag :searchCourseFrom, session['searchCourseFrom'] %> 
+				</td>
+		        <td>  </td>
+		      	<td>To:</td>
+				<td>
+					<%= text_field_tag :searchCourseTo, session['searchCourseTo'] %> 
+				</td>
+		      </tr>
+			  <% end %>
+			  <tr> 
+				  <td> &nbsp; 
+				  </td>
+			  </tr>
+		      <tr>
+			      <td>
+			      	<%= submit_tag "Search", :name => nil %>   
+			      </td>
+			      <td> </td>
+		      </tr>
+		</table>
+		<p>
+			
+		</p>
+		<% end %>
+  </p>
+<%=link_to "Back to Course List", courses_showall_students_courses_path, {:class=>"custom_button"}%>
+</div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  table_size: 1
+  weekday_discount: 1
+  weekend_discount: 1
+  amount_of_advance: 1
+
+two:
+  table_size: 1
+  weekday_discount: 1
+  weekend_discount: 1
+  amount_of_advance: 1

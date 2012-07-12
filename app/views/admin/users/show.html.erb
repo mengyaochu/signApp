@@ -1,0 +1,21 @@
+<% if current_user  %>
+    <%= render 'header' %>
+<% end %>
+
+<div class="container"> 
+<h2>User Detail</h2>
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @user.first_name %>  <%= @user.last_name %>
+</p>
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+<p>
+  <b>Role:</b>
+  <%= @user.roles.first.name %>
+</p>
+<%= link_to 'Back', admin_users_path %>
+</div>
