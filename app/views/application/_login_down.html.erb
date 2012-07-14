@@ -4,7 +4,7 @@
                 <div style="clear:both"></div>
                 <div id="loginBox">
 
-                    <%= form_for(User.new, :as => 'user', :url => '/users/sign_in ' , :html => { :id => 'loginForm'}) do |f| %>
+                    <%= form_for(User.new, :as => 'user', :url => '/gwu/users/sign_in ' , :html => { :id => 'loginForm'}) do |f| %>
                         <fieldset id="body">
                           <%= f.label :email %>
                             <%= f.email_field :email , :class => 'text' %>

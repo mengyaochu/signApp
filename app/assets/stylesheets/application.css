@@ -12,3 +12,10 @@
   *= require_tree .
 
 */
+.eventColorAthletics,
+.eventColorAthletics div,
+.eventColorAthletics span {
+    background-color: green; /* background color */
+    border-color: green;     /* border color */
+    color: yellow;           /* text color */
+    }

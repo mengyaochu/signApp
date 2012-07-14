@@ -35,7 +35,7 @@
     </td>
     <td style="color:green"><%= user.user_invite.activate ? 'Active' : 'Pending' %></td>
     <td> <% if permitted_to? :edit, @admin_users %> <%= link_to 'Edit', edit_admin_user_path(user) %> <% end %> </td>
-    <td> <% if permitted_to? :delete, @admin_users %> <%= link_to 'Delete', "/admin/users/#{user.id}", :confirm => 'Are you sure?', :method => :delete %> <% end %> </td>
+    <td> <% if permitted_to? :delete, @admin_users %> <%= link_to 'Delete', "/gwu/admin/users/#{user.id}", :confirm => 'Are you sure?', :method => :delete %> <% end %> </td>
   </tr>
 <% end %>
 </table>

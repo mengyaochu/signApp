@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label "With" %>
-    <%= select(:event, :with, @studentArray.collect{|p, name| [name, p]}, {:include_blank => "Me", :selected => :with}) %>
+    <%= select(:event, :with, @studentArray.collect{|p, name| [name, p] if p != current_user.id}, {:include_blank => "Me", :selected => :with}) %>
   </div>
   <div class="field">
     <%= f.label :starts_at %>

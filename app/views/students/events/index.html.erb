@@ -7,21 +7,35 @@
 <p>
 <%= link_to "New event", new_students_event_path %> | <%= link_to "Search", events_search_students_events_path %>
 </p>
+
 <% @events.each do |event| %>
   <dl class="listField">
     <dt>
-      <%= link_to event.title, students_event_path(event) %>
+      <% if event.course_id == 0 then %>
+        <%= link_to event.title, students_event_path(event) %>
+      <% else %>
+        <% if false %>
+        <%= link_to event.title, students_course_path(Course.find(event.course_id)) %>
+        <% end %>
+        <b> <%= event.title %> </b>
+      <% end %>
     </dt>
     <dd>
       Type: <%= @eventTypeArray[event.event_type_id.to_i - 1][:name] %> 
       <% if event.related_id != 0 then %> Received from: <%= Event.find(event.related_id).user.first_name %> <% end %>
       <% if event.with != 0 then %> With: <%= User.find(event.with).first_name %> <% end %>
-      </br>Duration: <%= event.starts_at.to_s[0,19] %> ~ <%= event.ends_at.to_s[0,19] %>
+      <% if event.course_id == 0 then  %>
+        </br>Duration: <%= event.starts_at.to_s[0,19] %> ~ <%= event.ends_at.to_s[0,19] %>
+      <% else %>
+        </br>Duration: <%= event.starts_at.to_s[11,9] %> ~ <%= event.ends_at.to_s[11,9] %>
+      <% end %>
       </br>Description: <%= event.description %>
     </dd>
     <dd>
+      <% if event.read_only == 0 then %>
       <%= link_to 'Edit', edit_students_event_path(event) %>
-      <%= link_to 'Delete', "/students/events/#{event.id}", :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to 'Delete', "/gwu/students/events/#{event.id}", :confirm => 'Are you sure?', :method => :delete %>
+      <% end %>
     </dd>
   </dl>
 <% end %>

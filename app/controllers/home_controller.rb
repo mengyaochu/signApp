@@ -6,8 +6,12 @@ class HomeController < ApplicationController
     
     user_roll_name = current_user.roles.collect.first[:name]
     
-    if user_roll_name == "student" || user_roll_name == "coach" then
-      redirect_path = calendar_index_path
+    if user_roll_name == "student" then
+      redirect_path = students_index_path
+    end
+    
+    if user_roll_name == "coach" then
+      redirect_path = coaches_index_path
     end
     
     if user_roll_name == "admin" || user_roll_name == "owner" then

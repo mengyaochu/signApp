@@ -2,8 +2,8 @@ class CoachesController < ApplicationController
   before_filter :authenticate_user!
   filter_access_to :all
   
-  # GET /coaches
-  # GET /coaches.json
+  # GET /coaches/index
+  # GET /coaches/index.json
   def index
     respond_to do |format|
       format.html # index.html.erb

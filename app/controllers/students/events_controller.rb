@@ -10,8 +10,30 @@ class Students::EventsController < ApplicationController
     session['searchEventTitle'] = params[:searchEventTitle] if params[:searchEventTitle]
     session['searchEventType'] = params[:searchEventType] if params[:searchEventType]
     
-    @events = Event.search(session['searchEventTitle'], session['searchEventType'], current_user.id).page(params[:page]) 
+    @course_event_ids = UsersCourse.where("student_id = ?", current_user.id)
+    
+    @events = Event.search(@course_event_ids, session['searchEventTitle'], session['searchEventType'], current_user.id).page(params[:page]) 
     @eventTypeArray = EventType.all()
+    
+    if @course_event_ids.length != 0 then
+      @course_event_ids.each do |course_event| 
+        @course = Course.find(course_event.course_id)
+        @event = Event.new
+        
+        @event.id = course_event.course_id
+        @event.title=@course.title
+        @event.event_type_id=1
+        @event.starts_at=@course.start_time
+        @event.ends_at=@course.end_time
+        @event.description="Status: #{@course.status}\nCRN: #{@course.crn}\nSubject: #{@course.subject}\nTerm: #{@course.term}\nDepartment: #{@course.department}\nInstructor: #{@course.instructor}\nBldg: #{@course.bldg}\nFrom: #{@course.from}\nTo: #{@course.to}\nDay: #{@course.day}\nSect: #{@course.sect}\nCredit: #{@course.credit}\nFee: #{@course.fee}"
+        @event.related_id = 0
+        @event.course_id = course_event.course_id
+        @event.with = 0
+        @event.read_only = 1 
+        
+        @events << @event
+      end
+    end
     
     respond_to do |format|
         format.html { render action: "index" }

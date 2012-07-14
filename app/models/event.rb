@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :starts_at, :message => " is required."
   validates_presence_of :ends_at, :message => " is required."
   
-  attr_accessible :title, :category_id, :event_type_id, :starts_at, :ends_at, :description, :user_id, :related_id, :with
+  attr_accessible :title, :category_id, :event_type_id, :starts_at, :ends_at, :description, :user_id, :related_id, :with, :course_id, :read_only
   
   belongs_to :user, :foreign_key => :user_id
   has_one :category
@@ -20,11 +20,14 @@ class Event < ActiveRecord::Base
     {
       :id => self.id,
       :title => self.title,
-      :description => self.description || "",
-      :start => starts_at.rfc822,
-      :end => ends_at.rfc822,
+      :description => self.description,
+      :start => starts_at - (8 * 3600),
+      :end => ends_at - (8 * 3600),
       :allDay => false,
       :recurring => false,
+      :textColor => "#000",
+      :backgroundColor => if self.event_type_id == 6 || self.event_type_id == 7 || self.event_type_id == 8 then "blue" elsif self.event_type_id == 1 then "red" elsif self.event_type_id == 5 then "yellow" else "green" end,
+      :borderColor => if self.event_type_id == 6 || self.event_type_id == 7 || self.event_type_id == 8 then "blue" elsif self.event_type_id == 1 then "red" elsif self.event_type_id == 5 then "yellow" else "green" end
     }
   end
   
@@ -32,12 +35,19 @@ class Event < ActiveRecord::Base
     Time.at(date_time.to_i).to_formatted_s(:db)
   end
   
-  
-  def self.search(title, type, user_id)
+  def self.search(course_event_ids, title, type, user_id)
     if (title || type)
-      	where('title LIKE ? AND event_type_id LIKE ? AND user_id = ?', "%#{title}%", "%#{type}%", user_id)
+      if course_event_ids.length == 0 then
+        where('title LIKE ? AND event_type_id LIKE ? AND user_id = ?', "%#{title}%", "%#{type}%", user_id)
+      else
+        where('course_id not in (?) AND title LIKE ? AND event_type_id LIKE ? AND user_id = ?', course_event_ids.map(&:course_id), "%#{title}%", "%#{type}%", user_id)
+      end
     else
-      	where('user_id = ?', user_id)
+      if course_event_ids.length == 0 then
+        where('user_id = ?', user_id)
+      else
+        where('course_id not in (?) AND user_id = ?', course_event_ids.map(&:course_id), user_id)
+      end
     end
   end
   

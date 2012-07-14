@@ -11,7 +11,7 @@ class Coaches::EventsController < ApplicationController
   	session['searchEventTitle'] = params[:searchEventTitle] if params[:searchEventTitle]
     session['searchEventType'] = params[:searchEventType] if params[:searchEventType]
     
-    @events = Event.search(session['searchEventTitle'], session['searchEventType'], current_user.id).page(params[:page]) 
+    @events = Event.search("", session['searchEventTitle'], session['searchEventType'], current_user.id).page(params[:page]) 
     @eventTypeArray = EventType.all()
     
   	respond_to do |format|
@@ -94,12 +94,13 @@ class Coaches::EventsController < ApplicationController
     @my_event_id = @event.id
     
     if (params[:event][:with] == '-1') then
-      @MyUsersTeam = Coach.find(current_user[:id]).coaches_team.team.users_team
+      @MyUsersTeam = Coach.find(current_user[:id]).coaches_team.team.users_teams
       @MyUsersTeam.collect do |p|
         @event = Event.new(params[:event])
         @event[:user_id] = p.student_id
         @event[:with] = 0
         @event[:related_id] = @my_event_id
+        @event[:read_only] = 1
         @event.save
       end
     end
@@ -109,6 +110,7 @@ class Coaches::EventsController < ApplicationController
       @event[:user_id] = params[:event][:with]
       @event[:with] = 0
       @event[:related_id] = @my_event_id
+      @event[:read_only] = 1
       @event.save
     end
      
@@ -132,7 +134,7 @@ class Coaches::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event[:user_id] = current_user.id
     @eventTypes = get_event_type_array()
-    @event[:related_id] = 0
+    @event[:related_id] = 1
     @event[:with] = 0 if params[:event][:with] == ''
     @event.update_attributes(params[:event])
     
@@ -147,6 +149,7 @@ class Coaches::EventsController < ApplicationController
         @event[:user_id] = p.student_id
         @event[:with] = 0
         @event[:related_id] = params[:id]
+        @event[:read_only] = 1
         @event.save
       end
     end
@@ -156,6 +159,7 @@ class Coaches::EventsController < ApplicationController
       @event[:user_id] = params[:event][:with]
       @event[:with] = 0
       @event[:related_id] = params[:id]
+      @event[:read_only] = 1
       @event.save
     end
     

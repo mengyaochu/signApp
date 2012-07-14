@@ -13,14 +13,8 @@ class Course < ActiveRecord::Base
   
   def self.search(title, term, crn, status, subject, instructor, c_day, c_from, c_to, starts_at, ends_at)
      if (title || term || crn || status || subject || instructor || c_day || c_from || starts_at || ends_at)
-        query_sql = 'title LIKE ? AND term LIKE ? AND crn LIKE ? AND status LIKE ? AND subject LIKE ? AND instructor LIKE ? AND day LIKE ?'
-        #if(c_from != '')
-        #  query_sql = query_sql + 'AND (from > date(c_from) OR to < date(c_from))'
-        #end
-        
-        where(query_sql, 
-        "%#{title}%", "%#{term}%", "%#{crn}%", "%#{status}%", "%#{subject}%", "%#{instructor}%", "%#{c_day}%")
-        
+          query_sql = 'title LIKE ? AND term LIKE ? AND crn LIKE ? AND status LIKE ? AND subject LIKE ? AND instructor LIKE ? AND day LIKE ?'
+          where(query_sql, "%#{title}%", "%#{term}%", "%#{crn}%", "%#{status}%", "%#{subject}%", "%#{instructor}%", "%#{c_day}%")
      else
         scoped
      end

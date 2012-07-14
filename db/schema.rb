@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 14) do
+ActiveRecord::Schema.define(:version => 20120714070145) do
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.integer  "with",          :default => 0,  :null => false
     t.integer  "related_id",    :default => 0,  :null => false
     t.integer  "course_id",     :default => 0,  :null => false
+    t.integer  "onlyread",      :default => 1
   end
 
   create_table "profiles", :force => true do |t|
