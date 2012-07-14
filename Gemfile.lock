@@ -31,6 +31,7 @@ GEM
     ansi (1.4.3)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (2.0.0)
     builder (3.0.0)
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
@@ -43,6 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    commonjs (0.2.6)
     daemons (1.1.8)
     declarative_authorization (0.5.5)
     devise (2.1.2)
@@ -80,6 +82,11 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    less (2.2.1)
+      commonjs (~> 0.2.6)
+    less-rails (2.2.2)
+      actionpack (>= 3.1)
+      less (~> 2.2.0)
     libv8 (3.3.10.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -140,7 +147,6 @@ GEM
       rails (>= 3.0.0)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
-    therubyracer-heroku (0.8.1.pre3)
     thin (1.4.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -152,6 +158,11 @@ GEM
       polyglot (>= 0.3.1)
     turn (0.9.6)
       ansi
+    twitter-bootstrap-rails (2.0.7)
+      actionpack (>= 3.1)
+      less-rails (~> 2.2.2)
+      railties (>= 3.1)
+      therubyracer (~> 0.10.1)
     tzinfo (0.3.33)
     uglifier (1.2.6)
       execjs (>= 0.3.0)
@@ -163,6 +174,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (= 2.0.0)
   carrierwave (>= 0.5.3)
   client_side_validations
   coffee-rails (~> 3.2.1)
@@ -181,7 +193,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   themes_for_rails
   therubyracer
-  therubyracer-heroku (= 0.8.1.pre3)
   thin
   turn
+  twitter-bootstrap-rails
   uglifier (>= 1.0.3)

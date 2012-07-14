@@ -1,0 +1,42 @@
+<div class="container" style="margin-top: 50px">
+	<div class='row'>
+		<div class = 'span4 center'>
+			<h1>Student Athletes</h1>
+			<p> Do you miss class because of your athletic schedule? Having trouble taking the classes you want, keeping up with the classes you take, and managing your time outside of the classroom and the field or gym? </p>
+		</div>
+		<div class = 'span4 center'>
+			<h1>Coaches</h1>
+			<p>How do you give your team crucial, everyday information like schedule changes and meeting times? How do you possibly manage your team's practices, competitions, stats, video, workouts, and nutrition all at once? </p>
+		</div>
+		<div class = 'span4 center'>
+			<h1>Administrators</h1>
+			<p> Having trouble doing your day job because you spend hours tracking down and setting up meetings with student athletes by phone and email for academic advising, NCAA compliance, and training?</p>
+		</div>
+	</div>
+	<br>
+	<div class='row'>
+		<div class = 'span12 center'>
+			<h2>Sometimes we forget that NCAA athletes are students, too.</h2> 
+			<h2>AthleteTrax is here to remind us. </h2>
+				<%= link_to "Learn More", :about, :class => "btn" %>
+			</div>
+		</div>
+		<br>
+		<div class = 'row'>
+			<div class = 'span6 center'>
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script>
+					<div class="fb-like" data-href="http://www.facebook.com/AthleteTrax" data-send="true" data-width="450" data-show-faces="false" data-colorscheme="light" data-font="lucida grande"></div>
+				</div>
+				<div class = 'span6 center'>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					<a href="https://twitter.com/athletetrax" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @athletetrax</a>
+				</div>
+			</div>
+		</div>

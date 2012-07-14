@@ -3,6 +3,9 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'mysql2'
 
+gem 'bootstrap-sass', '2.0.0'
+gem "twitter-bootstrap-rails"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -42,7 +45,7 @@ gem 'mime-types'
 
 
 group :production do
-  gem 'therubyracer-heroku', '0.8.1.pre3' # you will need this too
+ # gem 'therubyracer-heroku', '0.8.1.pre3' # you will need this too
   #gem 'pg'
 end
 
