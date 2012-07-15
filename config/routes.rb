@@ -4,15 +4,8 @@ DealsOffer::Application.routes.draw do
 
      match '/', to: 'static_pages#home'
      match '/about', to: 'static_pages#about'
-     match '/team', to: 'static_pages#team'
-     match '/jonhalpern', to: 'static_pages#jhalp'
-     match '/reinaldocoriano', to: 'static_pages#rcoriano'
-     match '/betsyzander', to: 'static_pages#bzander'
-     match '/brianjeffreygross', to: 'static_pages#bjg'
      match '/contact', to: 'static_pages#contact'
-     match '/news', to: 'static_pages#news'
      match '/login', to: 'static_pages#login'
-     match '/development', to: 'static_pages#development'
   end 
   
   scope "/gwu" do
