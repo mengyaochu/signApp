@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20120714070145) do
     t.integer  "with",          :default => 0,  :null => false
     t.integer  "related_id",    :default => 0,  :null => false
     t.integer  "course_id",     :default => 0,  :null => false
-    t.integer  "onlyread",      :default => 1
+    t.integer  "read_only",     :default => 0
   end
 
   create_table "profiles", :force => true do |t|
