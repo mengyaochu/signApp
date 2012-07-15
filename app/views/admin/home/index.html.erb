@@ -1,9 +1,32 @@
-<% if current_user  %>
-    <%= render 'header' %>
-<% end %>
 
-<p>
-   Welcome, This is admin page,
-</p>
+	<div class="container" style="margin-top: 50px">
+		<div class="row">
+			<div class="span12"> 
+				<% @current_user_rolename = current_user.roles.collect.first[:name] %>
+				<% if @current_user_rolename == "owner" || @current_user_rolename == "admin" then %>
+				| <%= link_to "Users", admin_users_path %>
+				<% end %>
+				<% if @current_user_rolename == "owner" || @current_user_rolename == "admin" then %>
+				| <%= link_to "Teams", admin_teams_path %>
+				<% end %>
+				<% if @current_user_rolename == "coach" || @current_user_rolename == "student" then %>
+				| <%= link_to "Calendar", calendar_index_path %>
+				<% end %>
+				<% if @current_user_rolename == "student" then %>
+				| <%= link_to "Events", events_index_students_events_path %>
+				<% end %>
+				<% if @current_user_rolename == "coach" then %>
+				| <%= link_to "Events", events_index_coaches_events_path %>
+				<% end %>
+				<% if @current_user_rolename == "coach" then %>
+				| <%= link_to "My Team", coaches_my_team_path %>
+				<% end %>
+				<% if @current_user_rolename == "owner" || @current_user_rolename == "student" then %>
+				| <%= link_to "Courses", courses_index_students_courses_path %>
+				<% end %>
+			</div>
+		</div>
+	
+	</div>
 
 

@@ -1,0 +1,17 @@
+<header class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<%= link_to image_tag("atlogo.png", alt: "AthleteTrax"), '/gwu/students/index', id:"logo" %> 
+			<div class = "nav-collapse">
+				<ul class="nav pull-right">
+					| <%= link_to "Home", root_path %>| <%= link_to "Profile", users_profile_path %> | <%= link_to "Log out", logout_path %> |
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
