@@ -1,4 +1,8 @@
 DealsOffer::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   scope "/gwu" do
     resources :calendar
     

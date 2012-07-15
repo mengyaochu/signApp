@@ -18,7 +18,7 @@ gem 'carrierwave' , '>= 0.5.3'
 
 gem 'nested_form'
 
-gem 'formtastic'
+gem 'formtastic', "~> 2.1.1"
 
 gem 'kaminari'
 
@@ -40,6 +40,9 @@ gem 'mini_magick'
 
 gem 'mime-types'
 
+gem 'rb-readline'
+
+gem 'activeadmin', "~> 0.4.3"
 
 group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3' # you will need this too
