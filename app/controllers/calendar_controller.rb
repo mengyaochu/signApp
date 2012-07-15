@@ -15,11 +15,15 @@ class CalendarController < ApplicationController
     #if user_roll_name == "coach" then
     #  redirect_path = calendar_index_path
     #end
+    session['calendarUser'] = params[:calendar_user_id] if params[:calendar_user_id]
     
     @events = Event.scoped  
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
-    @events = @events.user_id(current_user.id)
+    @events = @events.user_id(session['calendarUser'])
+    if session['calendarUser'].to_i != current_user.id
+      @events = @events.not_me()
+    end
     
     respond_to do |format|
       format.html

@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
   scope :user_id, lambda {|user_id| {:conditions => ["user_id = ?", user_id] }}
+  scope :not_me, lambda {{:conditions => ["read_only = 0"] }}
   
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/

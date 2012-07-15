@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     redirect_path = root_path
     
     user_roll_name = current_user.roles.collect.first[:name]
+    session['calendarUser'] = current_user.id
     
     if user_roll_name == "student" then
       redirect_path = students_index_path
