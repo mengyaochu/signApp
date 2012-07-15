@@ -1,102 +1,159 @@
-                    calendar_index GET    /gwu/calendar(.:format)                         calendar#index
-                                   POST   /gwu/calendar(.:format)                         calendar#create
-                      new_calendar GET    /gwu/calendar/new(.:format)                     calendar#new
-                     edit_calendar GET    /gwu/calendar/:id/edit(.:format)                calendar#edit
-                          calendar GET    /gwu/calendar/:id(.:format)                     calendar#show
-                                   PUT    /gwu/calendar/:id(.:format)                     calendar#update
-                                   DELETE /gwu/calendar/:id(.:format)                     calendar#destroy
-         reset_password_home_index        /gwu/home/reset_password(.:format)              home#reset_password
-                  reset_home_index        /gwu/home/reset(.:format)                       home#reset
-                        home_index GET    /gwu/home(.:format)                             home#index
-                                   POST   /gwu/home(.:format)                             home#create
-                          new_home GET    /gwu/home/new(.:format)                         home#new
-                         edit_home GET    /gwu/home/:id/edit(.:format)                    home#edit
-                              home GET    /gwu/home/:id(.:format)                         home#show
-                                   PUT    /gwu/home/:id(.:format)                         home#update
-                                   DELETE /gwu/home/:id(.:format)                         home#destroy
-                  new_user_session GET    /gwu/users/sign_in(.:format)                    devise/sessions#new
-                      user_session POST   /gwu/users/sign_in(.:format)                    devise/sessions#create
-              destroy_user_session DELETE /gwu/users/sign_out(.:format)                   devise/sessions#destroy
-                     user_password POST   /gwu/users/password(.:format)                   devise/passwords#create
-                 new_user_password GET    /gwu/users/password/new(.:format)               devise/passwords#new
-                edit_user_password GET    /gwu/users/password/edit(.:format)              devise/passwords#edit
-                                   PUT    /gwu/users/password(.:format)                   devise/passwords#update
-          cancel_user_registration GET    /gwu/users/cancel(.:format)                     users/registrations#cancel
-                 user_registration POST   /gwu/users(.:format)                            users/registrations#create
-             new_user_registration GET    /gwu/users/sign_up(.:format)                    users/registrations#new
-            edit_user_registration GET    /gwu/users/edit(.:format)                       users/registrations#edit
-                                   PUT    /gwu/users(.:format)                            users/registrations#update
-                                   DELETE /gwu/users(.:format)                            users/registrations#destroy
-                             login GET    /gwu/sign_in(.:format)                          devise/sessions#new
-                           sign_up GET    /gwu/sign_up(.:format)                          devise/registrations#new
-                            logout GET    /gwu/logout(.:format)                           devise/sessions#destroy
-                        admin_root        /gwu/admin(.:format)                            admin/home#index {:prefix=>"admin"}
-           invite_admin_home_index        /gwu/admin/home/invite(.:format)                admin/home#invite
-                  admin_home_index GET    /gwu/admin/home(.:format)                       admin/home#index
-                                   POST   /gwu/admin/home(.:format)                       admin/home#create
-                    new_admin_home GET    /gwu/admin/home/new(.:format)                   admin/home#new
-                   edit_admin_home GET    /gwu/admin/home/:id/edit(.:format)              admin/home#edit
-                        admin_home GET    /gwu/admin/home/:id(.:format)                   admin/home#show
-                                   PUT    /gwu/admin/home/:id(.:format)                   admin/home#update
-                                   DELETE /gwu/admin/home/:id(.:format)                   admin/home#destroy
-                       admin_users GET    /gwu/admin/users(.:format)                      admin/users#index
-                                   POST   /gwu/admin/users(.:format)                      admin/users#create
-                    new_admin_user GET    /gwu/admin/users/new(.:format)                  admin/users#new
-                   edit_admin_user GET    /gwu/admin/users/:id/edit(.:format)             admin/users#edit
-                        admin_user GET    /gwu/admin/users/:id(.:format)                  admin/users#show
-                                   PUT    /gwu/admin/users/:id(.:format)                  admin/users#update
-                                   DELETE /gwu/admin/users/:id(.:format)                  admin/users#destroy
-                       admin_teams GET    /gwu/admin/teams(.:format)                      admin/teams#index
-                                   POST   /gwu/admin/teams(.:format)                      admin/teams#create
-                    new_admin_team GET    /gwu/admin/teams/new(.:format)                  admin/teams#new
-                   edit_admin_team GET    /gwu/admin/teams/:id/edit(.:format)             admin/teams#edit
-                        admin_team GET    /gwu/admin/teams/:id(.:format)                  admin/teams#show
-                                   PUT    /gwu/admin/teams/:id(.:format)                  admin/teams#update
-                                   DELETE /gwu/admin/teams/:id(.:format)                  admin/teams#destroy
-                    students_index        /gwu/students/index(.:format)                   students#index
-    events_showall_students_events        /gwu/students/events/events_showall(.:format)   students/events#events_showall
-     events_search_students_events GET    /gwu/students/events/events_search(.:format)    students/events#events_search
-      events_index_students_events GET    /gwu/students/events/events_index(.:format)     students/events#events_index
-                   students_events GET    /gwu/students/events(.:format)                  students/events#index
-                                   POST   /gwu/students/events(.:format)                  students/events#create
-                new_students_event GET    /gwu/students/events/new(.:format)              students/events#new
-               edit_students_event GET    /gwu/students/events/:id/edit(.:format)         students/events#edit
-                    students_event GET    /gwu/students/events/:id(.:format)              students/events#show
-                                   PUT    /gwu/students/events/:id(.:format)              students/events#update
-                                   DELETE /gwu/students/events/:id(.:format)              students/events#destroy
-    courses_index_students_courses GET    /gwu/students/courses/courses_index(.:format)   students/courses#courses_index
-  courses_showall_students_courses        /gwu/students/courses/courses_showall(.:format) students/courses#courses_showall
-   courses_search_students_courses GET    /gwu/students/courses/courses_search(.:format)  students/courses#courses_search
-    course_assign_students_courses GET    /gwu/students/courses/course_assign(.:format)   students/courses#course_assign
-  course_unassign_students_courses GET    /gwu/students/courses/course_unassign(.:format) students/courses#course_unassign
-                  students_courses GET    /gwu/students/courses(.:format)                 students/courses#index
-                                   POST   /gwu/students/courses(.:format)                 students/courses#create
-               new_students_course GET    /gwu/students/courses/new(.:format)             students/courses#new
-              edit_students_course GET    /gwu/students/courses/:id/edit(.:format)        students/courses#edit
-                   students_course GET    /gwu/students/courses/:id(.:format)             students/courses#show
-                                   PUT    /gwu/students/courses/:id(.:format)             students/courses#update
-                                   DELETE /gwu/students/courses/:id(.:format)             students/courses#destroy
-                   coaches_my_team        /gwu/coaches/my_team(.:format)                  coaches#my_team
-                     coaches_index        /gwu/coaches/index(.:format)                    coaches#index
-     events_showall_coaches_events GET    /gwu/coaches/events/events_showall(.:format)    coaches/events#events_showall
-      events_search_coaches_events GET    /gwu/coaches/events/events_search(.:format)     coaches/events#events_search
-       events_index_coaches_events GET    /gwu/coaches/events/events_index(.:format)      coaches/events#events_index
-                    coaches_events GET    /gwu/coaches/events(.:format)                   coaches/events#index
-                                   POST   /gwu/coaches/events(.:format)                   coaches/events#create
-                 new_coaches_event GET    /gwu/coaches/events/new(.:format)               coaches/events#new
-                edit_coaches_event GET    /gwu/coaches/events/:id/edit(.:format)          coaches/events#edit
-                     coaches_event GET    /gwu/coaches/events/:id(.:format)               coaches/events#show
-                                   PUT    /gwu/coaches/events/:id(.:format)               coaches/events#update
-                                   DELETE /gwu/coaches/events/:id(.:format)               coaches/events#destroy
-                              root        /gwu(.:format)                                  home#index
-                     users_profile        /gwu/users/profile(.:format)                    users/profile#index
-              users_profile_create        /gwu/users/profile/create(.:format)             users/profile#create
-              users_profile_update        /gwu/users/profile/update(.:format)             users/profile#update
-                users_profile_show        /gwu/users/profile/show(.:format)               users/profile#show
-               home_reset_password        /gwu/home/reset_password(.:format)              home#reset_password
-                                          /*a(.:format)                                   errors#routing
-         graph_authorization_rules GET    /authorization_rules/graph(.:format)            authorization_rules#graph
-        change_authorization_rules GET    /authorization_rules/change(.:format)           authorization_rules#change
-suggest_change_authorization_rules GET    /authorization_rules/suggest_change(.:format)   authorization_rules#suggest_change
-               authorization_rules GET    /authorization_rules(.:format)                  authorization_rules#index
-              authorization_usages GET    /authorization_usages(.:format)                 authorization_usages#index
+                   admin_dashboard            /admin(.:format)                                admin/dashboard#index
+                admin_user_invites GET        /admin/user_invites(.:format)                   admin/user_invites#index
+                                   POST       /admin/user_invites(.:format)                   admin/user_invites#create
+             new_admin_user_invite GET        /admin/user_invites/new(.:format)               admin/user_invites#new
+            edit_admin_user_invite GET        /admin/user_invites/:id/edit(.:format)          admin/user_invites#edit
+                 admin_user_invite GET        /admin/user_invites/:id(.:format)               admin/user_invites#show
+                                   PUT        /admin/user_invites/:id(.:format)               admin/user_invites#update
+                                   DELETE     /admin/user_invites/:id(.:format)               admin/user_invites#destroy
+                       admin_users GET        /admin/users(.:format)                          admin/users#index
+                                   POST       /admin/users(.:format)                          admin/users#create
+                    new_admin_user GET        /admin/users/new(.:format)                      admin/users#new
+                   edit_admin_user GET        /admin/users/:id/edit(.:format)                 admin/users#edit
+                        admin_user GET        /admin/users/:id(.:format)                      admin/users#show
+                                   PUT        /admin/users/:id(.:format)                      admin/users#update
+                                   DELETE     /admin/users/:id(.:format)                      admin/users#destroy
+                       admin_roles GET        /admin/roles(.:format)                          admin/roles#index
+                                   POST       /admin/roles(.:format)                          admin/roles#create
+                    new_admin_role GET        /admin/roles/new(.:format)                      admin/roles#new
+                   edit_admin_role GET        /admin/roles/:id/edit(.:format)                 admin/roles#edit
+                        admin_role GET        /admin/roles/:id(.:format)                      admin/roles#show
+                                   PUT        /admin/roles/:id(.:format)                      admin/roles#update
+                                   DELETE     /admin/roles/:id(.:format)                      admin/roles#destroy
+                     admin_courses GET        /admin/courses(.:format)                        admin/courses#index
+                                   POST       /admin/courses(.:format)                        admin/courses#create
+                  new_admin_course GET        /admin/courses/new(.:format)                    admin/courses#new
+                 edit_admin_course GET        /admin/courses/:id/edit(.:format)               admin/courses#edit
+                      admin_course GET        /admin/courses/:id(.:format)                    admin/courses#show
+                                   PUT        /admin/courses/:id(.:format)                    admin/courses#update
+                                   DELETE     /admin/courses/:id(.:format)                    admin/courses#destroy
+                      admin_events GET        /admin/events(.:format)                         admin/events#index
+                                   POST       /admin/events(.:format)                         admin/events#create
+                   new_admin_event GET        /admin/events/new(.:format)                     admin/events#new
+                  edit_admin_event GET        /admin/events/:id/edit(.:format)                admin/events#edit
+                       admin_event GET        /admin/events/:id(.:format)                     admin/events#show
+                                   PUT        /admin/events/:id(.:format)                     admin/events#update
+                                   DELETE     /admin/events/:id(.:format)                     admin/events#destroy
+                       admin_teams GET        /admin/teams(.:format)                          admin/teams#index
+                                   POST       /admin/teams(.:format)                          admin/teams#create
+                    new_admin_team GET        /admin/teams/new(.:format)                      admin/teams#new
+                   edit_admin_team GET        /admin/teams/:id/edit(.:format)                 admin/teams#edit
+                        admin_team GET        /admin/teams/:id(.:format)                      admin/teams#show
+                                   PUT        /admin/teams/:id(.:format)                      admin/teams#update
+                                   DELETE     /admin/teams/:id(.:format)                      admin/teams#destroy
+                    admin_comments GET        /admin/comments(.:format)                       admin/comments#index
+                                   POST       /admin/comments(.:format)                       admin/comments#create
+                 new_admin_comment GET        /admin/comments/new(.:format)                   admin/comments#new
+                edit_admin_comment GET        /admin/comments/:id/edit(.:format)              admin/comments#edit
+                     admin_comment GET        /admin/comments/:id(.:format)                   admin/comments#show
+                                   PUT        /admin/comments/:id(.:format)                   admin/comments#update
+                                   DELETE     /admin/comments/:id(.:format)                   admin/comments#destroy
+            new_admin_user_session GET        /admin/login(.:format)                          active_admin/devise/sessions#new
+                admin_user_session POST       /admin/login(.:format)                          active_admin/devise/sessions#create
+        destroy_admin_user_session DELETE|GET /admin/logout(.:format)                         active_admin/devise/sessions#destroy
+               admin_user_password POST       /admin/password(.:format)                       active_admin/devise/passwords#create
+           new_admin_user_password GET        /admin/password/new(.:format)                   active_admin/devise/passwords#new
+          edit_admin_user_password GET        /admin/password/edit(.:format)                  active_admin/devise/passwords#edit
+                                   PUT        /admin/password(.:format)                       active_admin/devise/passwords#update
+                    calendar_index GET        /gwu/calendar(.:format)                         calendar#index
+                                   POST       /gwu/calendar(.:format)                         calendar#create
+                      new_calendar GET        /gwu/calendar/new(.:format)                     calendar#new
+                     edit_calendar GET        /gwu/calendar/:id/edit(.:format)                calendar#edit
+                          calendar GET        /gwu/calendar/:id(.:format)                     calendar#show
+                                   PUT        /gwu/calendar/:id(.:format)                     calendar#update
+                                   DELETE     /gwu/calendar/:id(.:format)                     calendar#destroy
+         reset_password_home_index            /gwu/home/reset_password(.:format)              home#reset_password
+                  reset_home_index            /gwu/home/reset(.:format)                       home#reset
+                        home_index GET        /gwu/home(.:format)                             home#index
+                                   POST       /gwu/home(.:format)                             home#create
+                          new_home GET        /gwu/home/new(.:format)                         home#new
+                         edit_home GET        /gwu/home/:id/edit(.:format)                    home#edit
+                              home GET        /gwu/home/:id(.:format)                         home#show
+                                   PUT        /gwu/home/:id(.:format)                         home#update
+                                   DELETE     /gwu/home/:id(.:format)                         home#destroy
+                  new_user_session GET        /gwu/users/sign_in(.:format)                    devise/sessions#new
+                      user_session POST       /gwu/users/sign_in(.:format)                    devise/sessions#create
+              destroy_user_session DELETE     /gwu/users/sign_out(.:format)                   devise/sessions#destroy
+                     user_password POST       /gwu/users/password(.:format)                   devise/passwords#create
+                 new_user_password GET        /gwu/users/password/new(.:format)               devise/passwords#new
+                edit_user_password GET        /gwu/users/password/edit(.:format)              devise/passwords#edit
+                                   PUT        /gwu/users/password(.:format)                   devise/passwords#update
+          cancel_user_registration GET        /gwu/users/cancel(.:format)                     users/registrations#cancel
+                 user_registration POST       /gwu/users(.:format)                            users/registrations#create
+             new_user_registration GET        /gwu/users/sign_up(.:format)                    users/registrations#new
+            edit_user_registration GET        /gwu/users/edit(.:format)                       users/registrations#edit
+                                   PUT        /gwu/users(.:format)                            users/registrations#update
+                                   DELETE     /gwu/users(.:format)                            users/registrations#destroy
+                             login GET        /gwu/sign_in(.:format)                          devise/sessions#new
+                           sign_up GET        /gwu/sign_up(.:format)                          devise/registrations#new
+                            logout GET        /gwu/logout(.:format)                           devise/sessions#destroy
+                        admin_root            /gwu/admin(.:format)                            admin/home#index {:prefix=>"admin"}
+           invite_admin_home_index            /gwu/admin/home/invite(.:format)                admin/home#invite
+                  admin_home_index GET        /gwu/admin/home(.:format)                       admin/home#index
+                                   POST       /gwu/admin/home(.:format)                       admin/home#create
+                    new_admin_home GET        /gwu/admin/home/new(.:format)                   admin/home#new
+                   edit_admin_home GET        /gwu/admin/home/:id/edit(.:format)              admin/home#edit
+                        admin_home GET        /gwu/admin/home/:id(.:format)                   admin/home#show
+                                   PUT        /gwu/admin/home/:id(.:format)                   admin/home#update
+                                   DELETE     /gwu/admin/home/:id(.:format)                   admin/home#destroy
+                                   GET        /gwu/admin/users(.:format)                      admin/users#index
+                                   POST       /gwu/admin/users(.:format)                      admin/users#create
+                                   GET        /gwu/admin/users/new(.:format)                  admin/users#new
+                                   GET        /gwu/admin/users/:id/edit(.:format)             admin/users#edit
+                                   GET        /gwu/admin/users/:id(.:format)                  admin/users#show
+                                   PUT        /gwu/admin/users/:id(.:format)                  admin/users#update
+                                   DELETE     /gwu/admin/users/:id(.:format)                  admin/users#destroy
+                                   GET        /gwu/admin/teams(.:format)                      admin/teams#index
+                                   POST       /gwu/admin/teams(.:format)                      admin/teams#create
+                                   GET        /gwu/admin/teams/new(.:format)                  admin/teams#new
+                                   GET        /gwu/admin/teams/:id/edit(.:format)             admin/teams#edit
+                                   GET        /gwu/admin/teams/:id(.:format)                  admin/teams#show
+                                   PUT        /gwu/admin/teams/:id(.:format)                  admin/teams#update
+                                   DELETE     /gwu/admin/teams/:id(.:format)                  admin/teams#destroy
+                    students_index            /gwu/students/index(.:format)                   students#index
+    events_showall_students_events            /gwu/students/events/events_showall(.:format)   students/events#events_showall
+     events_search_students_events GET        /gwu/students/events/events_search(.:format)    students/events#events_search
+      events_index_students_events GET        /gwu/students/events/events_index(.:format)     students/events#events_index
+                   students_events GET        /gwu/students/events(.:format)                  students/events#index
+                                   POST       /gwu/students/events(.:format)                  students/events#create
+                new_students_event GET        /gwu/students/events/new(.:format)              students/events#new
+               edit_students_event GET        /gwu/students/events/:id/edit(.:format)         students/events#edit
+                    students_event GET        /gwu/students/events/:id(.:format)              students/events#show
+                                   PUT        /gwu/students/events/:id(.:format)              students/events#update
+                                   DELETE     /gwu/students/events/:id(.:format)              students/events#destroy
+    courses_index_students_courses GET        /gwu/students/courses/courses_index(.:format)   students/courses#courses_index
+  courses_showall_students_courses            /gwu/students/courses/courses_showall(.:format) students/courses#courses_showall
+   courses_search_students_courses GET        /gwu/students/courses/courses_search(.:format)  students/courses#courses_search
+    course_assign_students_courses GET        /gwu/students/courses/course_assign(.:format)   students/courses#course_assign
+  course_unassign_students_courses GET        /gwu/students/courses/course_unassign(.:format) students/courses#course_unassign
+                  students_courses GET        /gwu/students/courses(.:format)                 students/courses#index
+                                   POST       /gwu/students/courses(.:format)                 students/courses#create
+               new_students_course GET        /gwu/students/courses/new(.:format)             students/courses#new
+              edit_students_course GET        /gwu/students/courses/:id/edit(.:format)        students/courses#edit
+                   students_course GET        /gwu/students/courses/:id(.:format)             students/courses#show
+                                   PUT        /gwu/students/courses/:id(.:format)             students/courses#update
+                                   DELETE     /gwu/students/courses/:id(.:format)             students/courses#destroy
+                   coaches_my_team            /gwu/coaches/my_team(.:format)                  coaches#my_team
+                     coaches_index            /gwu/coaches/index(.:format)                    coaches#index
+     events_showall_coaches_events GET        /gwu/coaches/events/events_showall(.:format)    coaches/events#events_showall
+      events_search_coaches_events GET        /gwu/coaches/events/events_search(.:format)     coaches/events#events_search
+       events_index_coaches_events GET        /gwu/coaches/events/events_index(.:format)      coaches/events#events_index
+                    coaches_events GET        /gwu/coaches/events(.:format)                   coaches/events#index
+                                   POST       /gwu/coaches/events(.:format)                   coaches/events#create
+                 new_coaches_event GET        /gwu/coaches/events/new(.:format)               coaches/events#new
+                edit_coaches_event GET        /gwu/coaches/events/:id/edit(.:format)          coaches/events#edit
+                     coaches_event GET        /gwu/coaches/events/:id(.:format)               coaches/events#show
+                                   PUT        /gwu/coaches/events/:id(.:format)               coaches/events#update
+                                   DELETE     /gwu/coaches/events/:id(.:format)               coaches/events#destroy
+                              root            /gwu(.:format)                                  home#index
+                     users_profile            /gwu/users/profile(.:format)                    users/profile#index
+              users_profile_create            /gwu/users/profile/create(.:format)             users/profile#create
+              users_profile_update            /gwu/users/profile/update(.:format)             users/profile#update
+                users_profile_show            /gwu/users/profile/show(.:format)               users/profile#show
+               home_reset_password            /gwu/home/reset_password(.:format)              home#reset_password
+                                              /*a(.:format)                                   errors#routing
+         graph_authorization_rules GET        /authorization_rules/graph(.:format)            authorization_rules#graph
+        change_authorization_rules GET        /authorization_rules/change(.:format)           authorization_rules#change
+suggest_change_authorization_rules GET        /authorization_rules/suggest_change(.:format)   authorization_rules#suggest_change
+               authorization_rules GET        /authorization_rules(.:format)                  authorization_rules#index
+              authorization_usages GET        /authorization_usages(.:format)                 authorization_usages#index
