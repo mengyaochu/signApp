@@ -13,7 +13,8 @@
   <b>Team:</b>
   <% @team.students.each do |student| %>
     <p>
-      <%= student.last_name %> | &nbsp; <%= link_to "Profile", users_profile_show_path(:user_id => student.id, :back_path => coaches_my_team_path) %>
+      <%= student.last_name %> | <%= link_to "Profile", users_profile_show_path(:user_id => student.id, :back_path => coaches_my_team_path) %>
+      | <%= link_to "Calendar", calendar_index_path(:calendar_user_id => student.id) %>
     </p>
   <% end %>
 </p>

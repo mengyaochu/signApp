@@ -31,9 +31,9 @@ $(document).ready(function() {
         editable:true,
         // a future calendar might have many sources.        
         eventSources: [{
-            url: '/calendar/',
-            color: 'red',
-            textColor: 'black',
+            url: '/gwu/calendar/',
+            //color: 'yellow',
+            //textColor: 'black',
             ignoreTimezone: false
         }],
         
@@ -41,7 +41,7 @@ $(document).ready(function() {
         dragOpacity: "0.5",
         
         select: function(start, end, allDay) {
-            window.location.replace("/calendar/new"+"?starts_at="+start+"&ends_at="+end);
+            window.location.replace("/gwu/calendar/new"+"?starts_at="+start+"&ends_at="+end);
         },
 
         //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
         // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
         eventClick: function(event, jsEvent, view){
-            window.location.replace("/calendar/"+event.id);
+            window.location.replace("/gwu/calendar/"+event.id);
         },
   });
 });
@@ -64,7 +64,7 @@ $(document).ready(function() {
 function updateEvent(the_event) {
   $.ajax({
     type: 'put',
-    url: "calendar/" + the_event.id,
+    url: "gwu/calendar/" + the_event.id,
     headers: {
       'X-Transaction': 'put',
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -84,7 +84,7 @@ function updateEvent(the_event) {
 function addEvent(the_event) {
   $.ajax({
     type: 'post',
-    url: "calendar/events",
+    url: "gwu/calendar/events",
     headers: {
       'X-Transaction': 'POST',
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

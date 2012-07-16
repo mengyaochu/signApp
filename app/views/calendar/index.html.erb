@@ -1,0 +1,21 @@
+<% if current_user  %>
+	<%= render 'header' %>
+<% end %>
+<% if notice %><p class="alert"><%= notice %></p><% end %>
+<div class="container">
+<p>
+<strong>
+<% if session['calendarUser'].to_i == current_user.id %>
+My calendar
+<% else %> 
+<%= "#{User.find(session['calendarUser']).first_name}'s Calendar" %>
+<% end %>
+</strong>
+&nbsp;&nbsp;&nbsp;
+<span style="color:blue"> athletics </span> |
+<span style="color:red"> academics </span> |
+<span style="color:yellow"> meetings </span> |
+<span style="color:green"> extracurricular </span>
+</p>
+<div id="calendar"></div>
+</div>

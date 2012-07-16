@@ -2,7 +2,7 @@
 	<%= render 'header' %>
 <% end %>
 <div class="div_list">
-	<% if(notice)%><p class="alert"><%= notice %></p><% end %>
+<% if(notice)%><p class="alert"><%= notice %></p><% end %>
 <div class="container">
   <p> <%= link_to "Search", courses_search_students_courses_path %> </p>
 	<% @courses.each do |course| %>
@@ -23,14 +23,17 @@
 		  <% @current_user_rolename = current_user.roles.collect.first[:name] %>
 		  <% if (@current_user_rolename == "student" ) then %>
 				<% if (UsersCourse.where("course_id = ? AND student_id = ?", course.id, current_user.id).length == 0 ) %>
+				<% if false %>
 				<%= link_to "Assign", course_assign_students_courses_path(:id => course.id) %>
+				<% end %>
+				<%= link_to "Assign", '#', {:onclick => "assign_course(#{course.id})"}%>
 				<% else %>
 				<%= link_to "Unassign", course_unassign_students_courses_path(:id => course.id) %>
 				<% end %>
 		  <% end %>
 			<% if (@current_user_rolename == "owner" ) then %>
 				<%= link_to 'Edit', edit_students_course_path(course) %>
-				<%= link_to 'Delete', "/students/courses/#{course.id}", confirm: 'Are you sure?', method: :delete %>
+				<%= link_to 'Delete', "/gwu/students/courses/#{course.id}", confirm: 'Are you sure?', method: :delete %>
 			<% end %>
 	  </dd>
 	</dl>
@@ -42,6 +45,60 @@
 
 <script type="text/javascript">
 <!-- 
-
+	function assign_course(course_id) {
+		$.ajax({
+			type: 'get',
+			url: "/gwu/students/courses/course_assign",
+			headers: {
+				'X-Transaction': 'get',
+				'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+			},
+			data: 
+			{ 
+				id: course_id
+			},
+			success: function(data) {
+				alert('success');
+			},
+			error: function(msg){
+			  var response = msg.responseText;
+			  //alert(response.substring(0,11));
+				
+				if (response.substring(0,11) == "confliction") {
+				  var confirm_msg = "You will miss " + response.substring(12,14) + " class days if you add this course to your calendar.\n\t\t\tWould you like to continue?";
+					var bResult = confirm(confirm_msg);
+					
+					if (bResult == true) {
+						$.ajax({
+							type: 'get',
+							url: "/gwu/students/courses/course_assign",
+							headers: {
+								'X-Transaction': 'get',
+								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+							},
+							data: 
+							{ 
+								id: course_id,
+								real_assign: 1
+							},
+							error: function(msg) {
+								//alert(msg.responseText);
+							},
+							complete: function() {
+								//alert('success');
+								window.location.reload()
+							}
+						});
+					}		 
+				}
+				else {
+					//alert(response);
+					window.location.reload()
+				}
+			}
+		});
+	
+		event.stopPropagation();
+	}
 -->
 </script> 

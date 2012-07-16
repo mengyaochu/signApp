@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  
+  <% if(notice)%><p class="alert"><%= notice %></p><% end %>
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>

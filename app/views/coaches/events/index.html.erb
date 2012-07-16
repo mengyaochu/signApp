@@ -27,7 +27,7 @@
     </dd>
     <dd>
       <%= link_to 'Edit', edit_coaches_event_path(event) %>
-      <%= link_to 'Delete', "/coaches/events/#{event.id}", :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to 'Delete', "/gwu/coaches/events/#{event.id}", :confirm => 'Are you sure?', :method => :delete %>
     </dd>
   </dl>
 <% end %>
@@ -35,12 +35,3 @@
 <%= paginate @events %> 
 </div>
 </div>
-<script type="text/javascript">
-<!-- 
-function changeEventPage() {
-	var curPageNum = document.getElementById("pageNum_pageNum").value;
-	var pageURL = "/events_showall?pageNum=".concat(curPageNum);
-	location.replace(pageURL);
-}
--->
-</script> 

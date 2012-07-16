@@ -20,6 +20,10 @@ class Students::CoursesController < ApplicationController
     session['searchCourseStartTime'] = params[:searchCourseStartTime] if params[:searchCourseStartTime]
     session['startCourseEndTime'] = params[:startCourseEndTime] if params[:startCourseEndTime]
     
+    #if params[:showall] != '1' then
+    #  @course_event_ids = UsersCourse.where("student_id = ?", current_user.id)  
+    #end
+    
 	  @courses = Course.search(session['searchCourseTitle'], session['searchCourseTerm'], session['searchCourseCRN'], 
     session['searchCourseStatus'], session['searchCourseSubject'], session['searchCourseInstrutor'], session['searchCourseDay'], 
     session['searchCourseFrom'],  session['searchCourseTo'], session['searchCourseStartTime'], session['startCourseEndTime']).page(params[:page]) 
@@ -153,80 +157,90 @@ class Students::CoursesController < ApplicationController
     
     return int_arry
   end
-
-  def getDayOfWeek(w_day)
-    tmp_w_day = w_day.split("-")
-    year = tmp_w_day[0]
-    month = tmp_w_day[1]
-    day = tmp_w_day[2]
     
-    year1_int = year.to_s.slice(0..1).to_i;
-    year2_int = year.to_s.slice(2..3).to_i;
-
-    
-    if month.to_i <= 2 then
-         refined_mm = month.to_i+12;
-         refined_dd = day+1;
-    else
-        refined_mm = month.to_i;
-         refined_dd = day
-    end
-      
-    result = ((21*year1_int.to_i/4) + (5*year2_int.to_i/4) + (26*(refined_mm.to_i+1)/10)+ refined_dd.to_i-1)%7
-    
-    return result; 
-  end
-  
   def course_assign
   	@course = Course.find(params[:id])
-  	
+    
   	if(@course.status == "CANCELLED" or  @course.status == "CLOSED")
-  		redirect_to courses_showall_students_courses_path, notice: 'The course must be opened or waitlist.'
-  		return
-    end
-  		
-  	if (@course.id)
-  	  
-  		if (@course.start_time.to_s[10,6].strip == "00:00") then
-  			redirect_to courses_showall_students_courses_path , notice: 'This course has not start/end time. You have to add this course maually.'
-  			return
-  		end
-  		end_date = Date.parse(@course.to.to_s)
-  		if (end_date < Date.today) then
-        redirect_to courses_showall_students_courses_path , notice: 'This course has been finished.'
+      respond_to do |format|
+        render json: 'The course must be opened or waitlist.', content_type: 'text/json'
         return
       end
-      
-  		from_date = Date.today
-  		to_date = Date.parse(@course.to.to_s)
-  		item_day = convertDaytoInt(@course.day)
-      
-  		from_date.upto(to_date) do |day|
-        isAssign = item_day.select {|s| s == getDayOfWeek(day.to_s)}
-        
-        if isAssign.length != 0 then
-          @event = Event.new
-          @event.title=@course.title
-          @event.event_type_id=1
-          @event.starts_at=day.to_s + " #{@course.start_time}"
-          @event.ends_at=day.to_s + " #{@course.end_time}"
-          @event.description="Status: #{@course.status}\nCRN: #{@course.crn}\nSubject: #{@course.subject}\nTerm: #{@course.term}\nDepartment: #{@course.department}\nInstructor: #{@course.instructor}\nBldg: #{@course.bldg}\nFrom: #{@course.from}\nTo: #{@course.to}\nDay: #{@course.day}\nSect: #{@course.sect}\nCredit: #{@course.credit}\nFee: #{@course.fee}"
-          @event.user_id=current_user.id
-          @event.related_id = 0
-          @event.with = 0
-          @event.course_id = @course.id
-          @event.save
+    end
+  		
+  	if (@course.id) then
+  		if (@course.start_time.to_s[10,6].strip == "00:00") then
+        respond_to do |format|
+          render json: 'This course has not start/end time. You have to add this course maually.', content_type: 'text/json'
+          return
         end
   		end
+      
+  		end_date = Date.parse(@course.to.to_s)
+  		if (end_date < Date.today) then
+        respond_to do |format|
+          render json: 'This course has been finished.'
+          return
+        end
+      end
+      
+      from_date = Date.today
+      to_date = Date.parse(@course.to.to_s)
+      item_day = convertDaytoInt(@course.day)
+      
+      #check confliction with coach's events
+      if params[:real_assign] != '1' then
+        @confliction_count = 0
+        from_date.upto(to_date) do |day|
+          isAssign = item_day.select {|s| s == getDayOfWeek(day.to_s)}
+          
+          if isAssign.length != 0 then
+            @course_starts_at = day.to_s + " #{@course.start_time.to_s[10,9]}"
+            @course_ends_at = day.to_s + " #{@course.end_time.to_s[10,9]}"
+            @coaches_events = Event.where("event_type_id in (?) AND ((? BETWEEN starts_at AND ends_at) OR (? BETWEEN starts_at AND ends_at) AND user_id = ?)", EventType.where("category_id = 4").map(&:id), @course_starts_at, @course_ends_at, current_user.id)
+            @confliction_count = @confliction_count + @coaches_events.length
+          end
+        end
+        if (@confliction_count > 0) then
+          respond_to do |format|
+            render json: "confliction:#{@confliction_count}"
+            return
+          end
+        end
+      end
+      
+      Event.transaction do
+        from_date.upto(to_date) do |day|
+          isAssign = item_day.select {|s| s == getDayOfWeek(day.to_s)}
+          
+          if isAssign.length != 0 then
+            @event = Event.new
+            @event.title=@course.title
+            @event.event_type_id=1
+            @event.starts_at=day.to_s + " #{@course.start_time.to_s[10,9]}"
+            @event.ends_at=day.to_s + " #{@course.end_time.to_s[10,9]}"
+            @event.description="Status: #{@course.status}\nCRN: #{@course.crn}\nSubject: #{@course.subject}\nTerm: #{@course.term}\nDepartment: #{@course.department}\nInstructor: #{@course.instructor}\nBldg: #{@course.bldg}\nFrom: #{@course.from}\nTo: #{@course.to}\nDay: #{@course.day}\nSect: #{@course.sect}\nCredit: #{@course.credit}\nFee: #{@course.fee}"
+            @event.user_id=current_user.id
+            @event.related_id = 0
+            @event.with = 0
+            @event.course_id = @course.id
+            @event.read_only = 1 
+            if !@event.save then
+              redirect_to courses_showall_students_courses_path(:showall => 1), notice: 'Assign operation is succeed.'
+              return;
+            end
+          end
+        end
+      end
       
       @user_course = UsersCourse.new({:student_id => current_user.id, :course_id => @course.id})
       @user_course.save
            
-      redirect_to courses_showall_students_courses_path, notice: 'Assign operation is succeed.'
+      redirect_to courses_showall_students_courses_path(:showall => 1), notice: 'Assign operation is succeed.'
   		return;
   	end 
 	
-		redirect_to courses_showall_students_courses_path, notice: 'Assign operation is failed!'
+		redirect_to courses_showall_students_courses_path(:showall => 1), notice: 'Assign operation is failed!'
 	end
     
 	def course_unassign
@@ -235,11 +249,10 @@ class Students::CoursesController < ApplicationController
     @events = Event.where("course_id = ? AND user_id = ?", @course.id, current_user.id)
           
   	if @events.destroy_all
-      UsersCourse.where("course_id = ? AND student_id = ?", @course.id, current_user.id).first.destroy
-      
-      redirect_to courses_showall_students_courses_path, notice: 'Unassign operation is succeed.'
+      UsersCourse.where("course_id = ? AND student_id = ?", @course.id, current_user.id).first.destroy  
+      redirect_to courses_showall_students_courses_path(:showall => 1), notice: 'Unassign operation is succeed.'
     else        
-      redirect_to courses_showall_students_courses_path, notice: 'Unassign operation is failed!'
+      redirect_to courses_showall_students_courses_path(:showall => 1), notice: 'Unassign operation is failed!'
     end 
 	end
 end

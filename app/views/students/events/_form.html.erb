@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+  <% if(notice)%><p class="alert"><%= notice %></p><% end %>
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -23,16 +24,38 @@
     <%= f.label "With" %>
     <%= select(:event, :with, @studentArray.collect{|p, name| [name, p]}, {:include_blank => "Me", :selected => :with}) %>
   </div>
-  <div class="field">
-    <%= f.label :starts_at %>
-    <%= f.text_field :starts_at, :class => "created-at-datetime", :value =>"#{@event[:starts_at].to_s[0,19]}"  %>
-  </div>
+  <% if @event.new_record? %>
+    <div class="field">
+      <%= f.label :starts_at %>
+      <%= f.text_field :starts_at, :class => "created-at-time" %> ~
+      <%= f.label :ends_at %>
+      <%= f.text_field :ends_at, :class => "created-at-time" %>
+    </div>
+    <div class="field">
+      <%= label(:repeat, "Repeat") %>
+      <%= select(:repeat, :option, @repeatArray.collect{|p, name| [name, p]}) %>
+    <div class="field">
+    </div>
+      <%= label(:repeat, "from") %>
+      <%= text_field(:repeat, :from, :class => "created-at-date") %> ~
+      <%= label(:repeat, "to") %>
+      <%= text_field(:repeat, :to, :class => "created-at-date") %>
+    <div class="field">
+      <%= label(:repeat, "days") %>
+      <%= select(:repeat, :days, @dayArray.collect {|id, name| [ name, id ] }, {}, { :multiple => true, :size => 8 }) %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :starts_at %>
+      <%= f.text_field :starts_at, :class => "created-at-datetime", :value =>"#{@event[:starts_at].to_s[0,19]}"  %>
+    </div>
 
-  <div class="field">
-    <%= f.label :ends_at %>
-    <%= f.text_field :ends_at, :class => "created-at-datetime", :value =>"#{@event[:ends_at].to_s[0,19]}"%>
-  </div>
-
+    <div class="field">
+      <%= f.label :ends_at %>
+      <%= f.text_field :ends_at, :class => "created-at-datetime", :value =>"#{@event[:ends_at].to_s[0,19]}"%>
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description, {:size => "40x6"} %>
@@ -46,6 +69,8 @@
 <!-- 
 onload = function () {
 $('.created-at-datetime').datetimepicker({dateFormat: 'yy-mm-dd ', timeFormat: 'hh:mm:ss ', ampm: false});
+$('.created-at-time').timepicker({timeFormat: 'hh:mm:ss ', ampm: false});
+$('.created-at-date').datepicker({dateFormat: 'yy-mm-dd '});
 }
 -->
 </script> 

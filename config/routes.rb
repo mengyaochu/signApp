@@ -1,4 +1,5 @@
 DealsOffer::Application.routes.draw do
+  
   scope '/' do
     root to: 'static_pages#home'
 
@@ -8,6 +9,10 @@ DealsOffer::Application.routes.draw do
      match '/login', to: 'static_pages#login'
   end 
   
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   scope "/gwu" do
     
   
